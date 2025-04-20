@@ -1,15 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `web_laptop` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `web_laptop`;
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: web_laptop
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +21,7 @@ USE `web_laptop`;
 
 DROP TABLE IF EXISTS `account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account` (
   `user_name` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -47,9 +45,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `account_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account_role` (
-  `role_id` int(11) NOT NULL,
+  `role_id` int NOT NULL,
   `user_name` varchar(255) NOT NULL,
   PRIMARY KEY (`role_id`,`user_name`),
   KEY `FK6mib7vu4jbpkbiwhhc9x1hc5i` (`user_name`),
@@ -74,15 +72,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bill` (
-  `id_bill` int(11) NOT NULL,
+  `id_bill` int NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `date_founded` varchar(255) DEFAULT NULL,
   `payment_methods` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `received` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL,
+  `status` int NOT NULL,
   `total_money` float NOT NULL,
   `id_customer` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_bill`),
@@ -107,12 +105,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contract_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contract_detail` (
-  `id_bill` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
+  `id_bill` int NOT NULL,
+  `id_product` int NOT NULL,
   `price` float NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `quantity` int NOT NULL,
   PRIMARY KEY (`id_bill`,`id_product`),
   KEY `FKjhefq9wymasr86okkjk5bi2fo` (`id_product`),
   CONSTRAINT `FK5f9ixat3me0qoaaf4uialtlt7` FOREIGN KEY (`id_bill`) REFERENCES `bill` (`id_bill`),
@@ -136,7 +134,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `id_customer` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -144,7 +142,7 @@ CREATE TABLE `customer` (
   `gender` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL,
+  `status` int NOT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_customer`),
@@ -159,7 +157,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('KH-11','Gia Lai','nmhieu17ce@vku.udn.vn','1','Hiếu','0375140585',1,'Lê Thị','hieu12345'),('KH-127','Hà Nội','tavanthuan@gmail.com','1','Thuận','0986456123',1,'Tạ Văn','thuan2k'),('KH-296','Nghệ An','trunghoa130299@gmail.com','1','Trung','0375140585',1,'Lê Thế','trunghoa'),('KH-330','Gia Lai','nmhieu17ce@vku.udn.vn','1','Hiếu','0375140585',1,'Nguyễn Minh','hieu17ce'),('KH-393','Nghệ An','trunghoa130299@gmail.com','1','Tuấn','0934342234',1,'Nguyễn Tất','tuan123'),('KH-609','Hà Nội','lttrung.17ce@vku.udn.vn','1','Bình','0375140585',1,'Nguyễn Văn','binh17ce'),('KH-655','Quảng Trị','lttrung.17ce@vku.udn.vn','1','Nam','0375140585',1,'Nguyễn Đình','12132'),('KH-753','Nghệ An','lttrung.17ce@vku.udn.vn','2','Thành','0375140585',1,'Lê Thị','thanh123'),('KH-812','Hà Tĩnh','nhhieu.17ce@vku.udn.vn','2','Trâm','0934342234',1,'Đặng Thị','tram123'),('KH-815','Nghệ An','dat123@gmail.com','1','Đạt','0934342234',1,'Lê Thế','dat123'),('KH-928','Quảng Nam','anh122345@gmail.com','2','Anh','0934342234',1,'Nguyễn Minh','anh1234');
+INSERT INTO `customer` VALUES ('KH-11','Gia Lai','nmhieu17ce@vku.udn.vn','1','Anh','0375140585',1,'Nguyễn Minh','hieu12345'),('KH-127','Hà Nội','tavanthuan@gmail.com','1','Tùng','0986456123',1,'Trần Thanh','thuan2k'),('KH-296','Nghệ An','trunghoa130299@gmail.com','1','Trang','0375140585',1,'Lê Huyền','trunghoa'),('KH-330','Gia Lai','nmhieu17ce@vku.udn.vn','1','Bảo','0375140585',1,'Phạm Quốc','hieu17ce'),('KH-393','Nghệ An','trunghoa130299@gmail.com','1','Ánh','0934342234',1,'Vũ Ngọc','tuan123'),('KH-609','Hà Nội','lttrung.17ce@vku.udn.vn','1','Anh','0375140585',1,'Đặng Đức','binh17ce'),('KH-655','Quảng Trị','lttrung.17ce@vku.udn.vn','1','Nhi','0375140585',1,'Bùi Thảo','12132'),('KH-753','Nghệ An','lttrung.17ce@vku.udn.vn','2','Thành','0375140585',1,'Nguyễn Khánh','thanh123'),('KH-812','Hà Tĩnh','nhhieu.17ce@vku.udn.vn','2','Ngọc','0934342234',1,'Phan Quỳnh','tram123'),('KH-815','Nghệ An','dat123@gmail.com','1','Huy','0934342234',1,'Đỗ Phúc','dat123'),('KH-928','Quảng Nam','anh122345@gmail.com','2','Chi','0934342234',1,'Tạ Diễm','anh1234');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +167,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employee` (
   `id_employee` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -179,7 +177,7 @@ CREATE TABLE `employee` (
   `full_name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
-  `position_id` int(11) DEFAULT NULL,
+  `position_id` int DEFAULT NULL,
   PRIMARY KEY (`id_employee`),
   KEY `FK1pqc3aygf1dslbfmpwa14net3` (`user_name`),
   KEY `FKbc8rdko9o9n1ri9bpdyxv3x7i` (`position_id`),
@@ -204,13 +202,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `evaluate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `evaluate` (
-  `id_evaluate` int(11) NOT NULL,
+  `id_evaluate` int NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   `date_founded` varchar(255) DEFAULT NULL,
-  `number_of_star` int(11) NOT NULL,
-  `id_product` int(11) DEFAULT NULL,
+  `number_of_star` int NOT NULL,
+  `id_product` int DEFAULT NULL,
   PRIMARY KEY (`id_evaluate`),
   KEY `FKan4q4h2gfgmsxb9jjusjiiahj` (`id_product`),
   CONSTRAINT `FKan4q4h2gfgmsxb9jjusjiiahj` FOREIGN KEY (`id_product`) REFERENCES `product` (`id_product`)
@@ -232,13 +230,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `evaluates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `evaluates` (
   `id_customer` varchar(255) NOT NULL,
-  `id_product` int(11) NOT NULL,
+  `id_product` int NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   `date_founded` date DEFAULT NULL,
-  `number_of_star` int(11) NOT NULL,
+  `number_of_star` int NOT NULL,
   PRIMARY KEY (`id_customer`,`id_product`),
   KEY `FKkuny9p51h05uyvuqji9l5q3cd` (`id_product`),
   CONSTRAINT `FK9f1telx2xr0e0doi5dsdu3yh6` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`),
@@ -252,7 +250,7 @@ CREATE TABLE `evaluates` (
 
 LOCK TABLES `evaluates` WRITE;
 /*!40000 ALTER TABLE `evaluates` DISABLE KEYS */;
-INSERT INTO `evaluates` VALUES ('KH-11',7,'Đẹp quá','2022-01-19',5),('KH-127',1,'Khách hàng đã ghé thắm','2024-04-24',5),('KH-127',4,'Đã ghé thăm','2024-04-24',5),('KH-127',19,'Test','2024-05-07',5),('KH-127',22,'Đã ghé thăm','2024-04-24',5),('KH-127',23,'Đã ghé thăm','2024-04-24',5),('KH-296',2,'Xuất sắc luôn','2022-01-22',5),('KH-296',3,'Mua đi các bạn ơii','2022-01-22',5),('KH-296',4,'Xinh quá!','2022-01-22',5),('KH-393',2,'Đẹp quá','2022-01-23',5),('KH-655',1,'Giá này k mua thì còn đu đỉnh giá nào nữa ^^!','2022-01-11',5),('KH-655',6,'Vào đu đỉnh đi anh em ơiiiiiiiiiiii','2022-01-11',5),('KH-753',10,'Tuyệt vời','2022-01-22',5),('KH-812',1,'Xịn xò quá đi','2022-01-22',5),('KH-812',2,'Mua đi mọi người ơi','2022-01-22',5),('KH-812',3,'Quá đẹp!','2022-01-22',5),('KH-812',4,'Đẹp quá','2022-01-22',5),('KH-812',5,'Hơn cả tuyệt vời !','2022-01-22',5),('KH-815',1,'Xịn Quá!','2022-01-11',5),('KH-815',2,'Xuất sắc','2022-01-11',5),('KH-815',7,'Tuyệt vời!','2022-01-11',5),('KH-815',10,'ádasdasasas','2022-01-19',5),('KH-815',18,'Máy xịn quá','2022-01-19',5);
+INSERT INTO `evaluates` VALUES ('KH-11',7,'Laptop hoạt động ổn định, hiệu năng tốt trong tầm giá. Thiết kế mỏng nhẹ, màn hình đẹp, pin dùng khá lâu. Giao hàng nhanh, đóng gói kỹ, hỗ trợ khách hàng nhiệt tình. Rất hài lòng!','2022-01-19',5),('KH-127',1,'Khách hàng đã ghé thắm','2024-04-24',5),('KH-127',4,'Máy chạy mượt, khởi động nhanh, đúng như mô tả.','2024-04-24',5),('KH-127',19,'Thiết kế đẹp, nhẹ, phù hợp mang theo đi làm.','2024-05-07',5),('KH-127',22,'Hiệu năng ổn định, xử lý công việc văn phòng tốt.','2024-04-24',5),('KH-127',23,'Giao hàng nhanh, đóng gói cẩn thận.','2024-04-24',5),('KH-296',2,'Màn hình sắc nét, âm thanh khá ổn.','2022-01-22',5),('KH-296',3,'Pin trâu, dùng cả ngày không lo sạc.\n\n','2022-01-22',5),('KH-296',4,'Giá hợp lý so với cấu hình.','2022-01-22',5),('KH-393',2,'Máy mát, tản nhiệt tốt, ít bị nóng.','2022-01-23',5),('KH-655',1,'Gõ phím êm, touchpad nhạy.\n\n','2022-01-11',5),('KH-655',6,'Rất hài lòng với sản phẩm, đáng tiền.','2022-01-11',5),('KH-753',10,'Phù hợp cho sinh viên và dân văn phòng.','2022-01-22',5),('KH-812',1,'Máy mới nguyên seal, dùng ngon lành.','2022-01-22',5),('KH-812',2,'Nhân viên tư vấn nhiệt tình, dễ hiểu.','2022-01-22',5),('KH-812',3,'Máy mỏng nhẹ, đẹp hơn mong đợi.','2022-01-22',5),('KH-812',4,'Đáp ứng tốt nhu cầu học online và làm việc từ xa.','2022-01-22',5),('KH-812',5,'Chơi game nhẹ ổn, không giật lag.','2022-01-22',5),('KH-815',1,'Khởi động nhanh, không gặp lỗi gì.','2022-01-11',5),('KH-815',2,'Hệ điều hành cài sẵn tiện lợi, không mất công setup.','2022-01-11',5),('KH-815',7,'Nhỏ gọn, tiện mang đi công tác.','2022-01-11',5),('KH-815',10,'Máy dùng ổn, khởi động nhanh, xử lý mượt các tác vụ cơ bản.','2022-01-19',5),('KH-815',18,'Cấu hình tốt trong tầm giá, phù hợp cả học tập và làm việc.','2022-01-19',5);
 /*!40000 ALTER TABLE `evaluates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,9 +260,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint(20) DEFAULT NULL
+  `next_val` bigint DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -284,13 +282,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `oder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oder` (
-  `ma_sp` int(11) NOT NULL,
-  `gia` int(11) NOT NULL,
+  `ma_sp` int NOT NULL,
+  `gia` int NOT NULL,
   `img` varchar(255) DEFAULT NULL,
   `makh` varchar(255) DEFAULT NULL,
-  `so_luong` int(11) NOT NULL,
+  `so_luong` int NOT NULL,
   `ten_sp` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ma_sp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -311,9 +309,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `position`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `position` (
-  `position_id` int(11) NOT NULL AUTO_INCREMENT,
+  `position_id` int NOT NULL AUTO_INCREMENT,
   `position_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`position_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -335,26 +333,26 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `id_product` int(11) NOT NULL AUTO_INCREMENT,
+  `id_product` int NOT NULL AUTO_INCREMENT,
   `avt` varchar(255) DEFAULT NULL,
   `camerat` varchar(255) DEFAULT NULL,
   `cpu` varchar(255) DEFAULT NULL,
   `hdh` varchar(255) DEFAULT NULL,
-  `num_of_review` int(11) NOT NULL,
-  `num_of_star` int(11) NOT NULL,
+  `num_of_review` int NOT NULL,
+  `num_of_star` int NOT NULL,
   `pin` varchar(255) DEFAULT NULL,
-  `price` int(11) NOT NULL,
+  `price` int NOT NULL,
   `product_name` varchar(255) DEFAULT NULL,
-  `quantity` int(11) NOT NULL,
+  `quantity` int NOT NULL,
   `ram` varchar(255) DEFAULT NULL,
   `rom` varchar(255) DEFAULT NULL,
   `screen` varchar(255) DEFAULT NULL,
   `sd_card` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL,
-  `id_type` int(11) DEFAULT NULL,
-  `id_promotion` int(11) DEFAULT NULL,
+  `status` int NOT NULL,
+  `id_type` int DEFAULT NULL,
+  `id_promotion` int DEFAULT NULL,
   PRIMARY KEY (`id_product`),
   KEY `FKjnavkoass3f8t4me1tvfavo3b` (`id_type`),
   KEY `FK5y91nfsk3v6ulgmlpr2wj2aa6` (`id_promotion`),
@@ -379,9 +377,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_type` (
-  `id_type` int(11) NOT NULL,
+  `id_type` int NOT NULL,
   `avt` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `name_type` varchar(255) DEFAULT NULL,
@@ -405,9 +403,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `promotion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `promotion` (
-  `id_promotion` int(11) NOT NULL,
+  `id_promotion` int NOT NULL,
   `date_end` varchar(255) DEFAULT NULL,
   `date_start` varchar(255) DEFAULT NULL,
   `name_promotion` varchar(255) DEFAULT NULL,
@@ -433,9 +431,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int NOT NULL AUTO_INCREMENT,
   `role_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -460,4 +458,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-25 11:43:05
+-- Dump completed on 2025-04-20 21:20:02

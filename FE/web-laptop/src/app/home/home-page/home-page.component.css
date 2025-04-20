@@ -44,7 +44,6 @@
 
 form.input-search {
   margin-left: 20px;
-  background: #ddd;
   border: 2px solid #bbb;
   border-radius: 10px;
   height: 35px;
@@ -509,17 +508,33 @@ button[data-tooltip]:hover::after{
   background: #f21;
   color: white;
 }
+
 /* Tra gop 0% */
 .sanPham label.tragop {
   background: #f28902;
+  display: flex;
+  /* align-content: center; */
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
 }
 /* Gia re online */
 .sanPham label.giareonline {
   background: #3fb846;
+  display: flex;
+  /* align-content: center; */
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
 }
 /* Moi ra mat */
 .sanPham label.moiramat {
   background: #2546ff;
+  display: flex;
+  /* align-content: center; */
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
 }
 /* ===== End Khuyen mai ====== */
 
