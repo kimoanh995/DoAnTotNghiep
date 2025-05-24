@@ -15,6 +15,7 @@ import {
   ApexTitleSubtitle
 } from 'ng-apexcharts';
 import {Title} from "@angular/platform-browser";
+import {IHotProduct} from "../../interface/IHotProduct";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -72,6 +73,8 @@ export class ChartComponent implements OnInit {
 
   pastDay = this.datePipe.transform(new Date().setDate(new Date().getDate() - 365), 'dd/MM/yyyy');
   today = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+  hotProducts: IHotProduct[] = [];
+  total: String = "";
 
   @ViewChild('chart') chart!: ChartComponent|any;
   public chartOptions: Partial<ChartOptions>|any;
@@ -99,6 +102,10 @@ export class ChartComponent implements OnInit {
       checkStartDate: new FormControl('', [Validators.required]),
       checkEndDate: new FormControl('',[Validators.required])
     }, this.checkDate);
+
+    this.billService.hot().subscribe((data) => {
+      this.hotProducts = data;
+    })
   }
   private checkDate(check: AbstractControl): any {
     const fromDate = check.get('checkStartDate');
@@ -122,22 +129,31 @@ export class ChartComponent implements OnInit {
   }
 
   private getInterestDay() {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
+
+
     this.billService.getListStatistic(this.startDate, this.endDate).subscribe((data) => {
       this.bills = data;
       let month = new Date(this.bills[0].dateFounded);
       let tempMoney = 0;
+      let total = 0;
       for (let i = 0; i < this.bills.length; i++) {
         this.totalMoney += this.bills[i].totalMoney;
         let startMonth = new Date(this.bills[i].dateFounded);
         if (month.getMonth() == startMonth.getMonth()) {
           tempMoney += this.bills[i].totalMoney;
         } else {
+          total += tempMoney;
           this.totalPay.push(tempMoney);
           this.label.push("Tháng" + (month.getMonth() + 1));
           tempMoney = this.bills[i].totalMoney;
           month = startMonth;
         }
       }
+      this.total = formatter.format(total);
       this.totalPay.push(tempMoney);
       this.label.push("Tháng" + (month.getMonth() + 1));
       this.statisticExected();

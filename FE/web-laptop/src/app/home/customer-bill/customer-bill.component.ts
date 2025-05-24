@@ -19,6 +19,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class CustomerBillComponent implements OnInit {
   billList: IBill[] =[];
+  history: IBill[] =[];
   userName: string ='';
   account!: AccountDTO;
   searchItem: any;
@@ -42,6 +43,10 @@ export class CustomerBillComponent implements OnInit {
       this.account= data;
       this.billService.getALLBill(this.account.idCustomer).subscribe((data) =>{
         this.billList = data;
+      })
+
+      this.customerService.history(this.account.idCustomer).subscribe((data) => {
+        this.history = data
       })
     });
 

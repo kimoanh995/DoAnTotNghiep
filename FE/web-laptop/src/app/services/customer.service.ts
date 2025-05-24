@@ -38,6 +38,9 @@ export class CustomerService {
   getCustomerUser(id : String): Observable<any>{
     return  this.http.get<any>(this.API+'/viewUser/' + id,this.httpOptions)
   }
+  history(id : String): Observable<any>{
+    return  this.http.get<any>(this.API+'/viewHistory/' + id,this.httpOptions)
+  }
   deleteCustomer(id: String): Observable<any>{
     return  this.http.delete<any>(this.API +'/deleteCustomer/' + id,this.httpOptions)
   }

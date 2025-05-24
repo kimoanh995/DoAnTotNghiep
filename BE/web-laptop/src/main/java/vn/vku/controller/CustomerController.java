@@ -27,20 +27,23 @@ import java.util.List;
 @RequestMapping(value = "/customer")
 @RestController
 public class CustomerController {
-    @Autowired
-    CustomerService customerService;
+    final CustomerService customerService;
 
-    @Autowired
-    RoleService roleService;
+    final RoleService roleService;
 
-    @Autowired
-    AccountRoleService accountRoleService;
+    final AccountRoleService accountRoleService;
 
-    @Autowired
-    AccountService accountService;
+    final AccountService accountService;
 
-    @Autowired
-    MailSender mailSender;
+    final MailSender mailSender;
+
+    public @Autowired CustomerController(CustomerService customerService, RoleService roleService, AccountRoleService accountRoleService, AccountService accountService, MailSender mailSender) {
+        this.customerService = customerService;
+        this.roleService = roleService;
+        this.accountRoleService = accountRoleService;
+        this.accountService = accountService;
+        this.mailSender = mailSender;
+    }
 
     @RequestMapping(value = "/listCustomer", method = RequestMethod.GET)
     public ResponseEntity<Page<Customer>> getAllCustomer(@PageableDefault(size = 6) Pageable pageable) {
@@ -50,6 +53,7 @@ public class CustomerController {
         }
         return new ResponseEntity<>(customerList, HttpStatus.OK);
     }
+
     @RequestMapping(value = "/deleteCustomer/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Customer> deleteCustomer(@PathVariable("id") String id) {
         Customer customer = customerService.findById(id);
@@ -68,14 +72,15 @@ public class CustomerController {
         }
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
+
     @RequestMapping(value = "/searchCustomer", method = RequestMethod.GET)
     public ResponseEntity<Page<Customer>> searchCustomer(@RequestParam String name,
                                                          @PageableDefault(size = 6) Pageable pageable) {
-        Page<Customer> customerPage = customerService.searchCustomer(name,pageable);
+        Page<Customer> customerPage = customerService.searchCustomer(name, pageable);
         if (customerPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(customerPage,HttpStatus.OK);
+        return new ResponseEntity<>(customerPage, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/createCustomer", method = RequestMethod.POST)
@@ -99,7 +104,7 @@ public class CustomerController {
         Customer customer = new Customer(maKH, accountCustomer.getSurname(), accountCustomer.getName(),
                 accountCustomer.getGender(), accountCustomer.getPhone(),
                 accountCustomer.getEmail(), accountCustomer.getAddress(),
-                account,1);
+                account, 1);
         customerService.saveCustomer(customer);
 //        String htmlMsg = "Chào mừng Email: " + accountCustomer.getEmail() + "\n" + "Tài khoản đăng ký: " + accountCustomer.getUserName() +
 //                "\n" + "Mật khẩu: "+ accountCustomer.getPassword() + "\n" + "Vui lòng truy cập vào link: http://localhost:4200/login " +
@@ -111,7 +116,7 @@ public class CustomerController {
     }
 
     //Mail
-    public void sendEmail(String from,String to, String subject, String content){
+    public void sendEmail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(from);
         mailMessage.setTo(to);
@@ -120,14 +125,20 @@ public class CustomerController {
 
         mailSender.send(mailMessage);
     }
+
     @GetMapping(value = "/viewUser/{id}")
     public ResponseEntity<AccountCustomer> detailCustomerUser(@PathVariable String id) {
         Customer customer = this.customerService.findByUser(id);
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        AccountCustomer accountCustomer = new AccountCustomer(customer.getIdCustomer(),customer.getSurname(),customer.getName(),customer.getGender(),
-                customer.getPhone(),customer.getEmail(),customer.getAddress(),customer.getAccount().getUserName(),customer.getAccount().getPassword(),customer.getStatus());
+        AccountCustomer accountCustomer = new AccountCustomer(customer.getIdCustomer(), customer.getSurname(), customer.getName(), customer.getGender(),
+                customer.getPhone(), customer.getEmail(), customer.getAddress(), customer.getAccount().getUserName(), customer.getAccount().getPassword(), customer.getStatus());
         return new ResponseEntity<>(accountCustomer, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/viewHistory/{id}")
+    public ResponseEntity<List<Bill>> history(@PathVariable String id) {
+        return new ResponseEntity<>(customerService.history(id), HttpStatus.OK);
     }
 }

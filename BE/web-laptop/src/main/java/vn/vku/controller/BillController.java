@@ -25,17 +25,21 @@ import java.util.List;
 @RequestMapping("/bill")
 @RestController
 public class BillController {
-    @Autowired
-    BillService billService;
 
-    @Autowired
-    CustomerService customerService;
+    final BillService billService;
 
-    @Autowired
-    ProductService productService;
+    final CustomerService customerService;
 
-    @Autowired
-    ContractDetailService contractDetailService;
+    final ProductService productService;
+
+    final ContractDetailService contractDetailService;
+
+    public @Autowired BillController(BillService billService, CustomerService customerService, ProductService productService, ContractDetailService contractDetailService) {
+        this.billService = billService;
+        this.customerService = customerService;
+        this.productService = productService;
+        this.contractDetailService = contractDetailService;
+    }
 
     @RequestMapping(value = "/listBill", method = RequestMethod.GET)
     public ResponseEntity<Page<Bill>> getAllBill(@PageableDefault(size = 6) Pageable pageable) {
@@ -132,6 +136,11 @@ public class BillController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(ordersList, HttpStatus.OK);
+    }
+
+    @GetMapping("/hot")
+    public ResponseEntity<List<HotProduct>> hot() {
+        return new ResponseEntity<>(contractDetailService.hot(), HttpStatus.OK);
     }
 
 }

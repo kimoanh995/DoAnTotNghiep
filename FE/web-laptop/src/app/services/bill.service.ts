@@ -52,4 +52,8 @@ export class BillService {
   getListStatistic(startDate:string,endDate:string):Observable<any>{
     return this.http.get<any>(this.API+'/statisticOrder?start=' + startDate + '&end=' + endDate,this.httpOptions);
   }
+
+  hot():Observable<any>{
+    return this.http.get<any>(this.API+'/hot', this.httpOptions);
+  }
 }
