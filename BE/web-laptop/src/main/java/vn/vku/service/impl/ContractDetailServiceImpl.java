@@ -49,7 +49,9 @@ public class ContractDetailServiceImpl implements ContractDetailService {
         for (ContractDetail contractDetail : contractDetails) {
             final int id = contractDetail.getProduct().getIdProduct();
             final HotProduct hotProduct = new HotProduct(contractDetail.getProduct(), count[id]);
-            list.add(hotProduct);
+            if (!list.contains(hotProduct)) {
+                list.add(hotProduct);
+            }
         }
 
         for (Product product: products) {
