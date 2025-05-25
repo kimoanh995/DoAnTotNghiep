@@ -30,11 +30,11 @@
           <th class="text-center">Hành Động</th>
         </tr>
         </thead>
-        <tbody *ngFor="let p of productList,index as i" class="tb">
-        <tr >
+        <tbody class="tb">
+        <tr *ngFor="let p of productList; index as i">
           <td>{{p.idProduct}}</td>
           <td>{{p.productName}}</td>
-          <td><img [src]="'assets/img/' +p.avt" alt="" width="150px" height="100px"></td>
+          <td><img [src]="'assets/img/' + p.avt" alt="" width="150px" height="100px"></td>
           <td>{{p.productType.nameType}}</td>
           <td class="text-danger">{{numToString(p.price)}}<sup>đ</sup></td>
           <td>{{p.promotion.namePromotion}}</td>
