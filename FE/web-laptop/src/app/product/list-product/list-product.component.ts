@@ -67,12 +67,12 @@ export class ListProductComponent implements OnInit {
       this.totalPagination = data.totalPages;
       console.log(this.productList);
     });
-    try {
-      const errorField = this.renderer.selectRootElement('.tb');
-      errorField.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"} );
-    } catch (err) {
-
-    }
+    // try {
+    //   const errorField = this.renderer.selectRootElement('.tb');
+    //   errorField.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"} );
+    // } catch (err) {
+    //
+    // }
   }
 
   searchP() {
